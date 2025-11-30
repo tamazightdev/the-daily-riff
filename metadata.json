@@ -1,0 +1,5 @@
+{
+  "name": "The Daily Riff",
+  "description": "A Seth Godin-style daily blog post generator using Gemini API and Google Search Grounding.",
+  "requestFramePermissions": []
+}
