@@ -74,7 +74,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose, apiKey, 
                 onChange={(e) => setLocalModel(e.target.value as GeminiModel)}
                 className="w-full px-4 py-3 rounded-xl glass-input appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-gray-800"
               >
-                <option value={GeminiModel.PRO}>Gemini 2.5 Pro (Recommended)</option>
+                <option value={GeminiModel.GEMINI_3_PRO}>Gemini 3 Pro (New &amp; Powerful)</option>
+                <option value={GeminiModel.PRO}>Gemini 2.5 Pro (Stable)</option>
                 <option value={GeminiModel.FLASH}>Gemini Flash Latest (Faster)</option>
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">

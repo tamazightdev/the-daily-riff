@@ -136,6 +136,15 @@ function App() {
     }
   };
 
+  const getModelDisplayName = (m: GeminiModel) => {
+    switch (m) {
+      case GeminiModel.GEMINI_3_PRO: return 'Gemini 3 Pro';
+      case GeminiModel.PRO: return 'Gemini 2.5 Pro';
+      case GeminiModel.FLASH: return 'Gemini Flash';
+      default: return 'Gemini';
+    }
+  };
+
   return (
     <div className="min-h-screen w-full overflow-x-hidden relative py-8 px-4 sm:px-6 lg:px-8 flex flex-col items-center">
       
@@ -205,7 +214,7 @@ function App() {
             </form>
           </div>
           <p className="text-center mt-4 text-gray-500 text-sm">
-            Using <span className="font-semibold">{model === GeminiModel.PRO ? 'Gemini 2.5 Pro' : 'Gemini Flash'}</span> with Google Search Grounding
+            Using <span className="font-semibold">{getModelDisplayName(model)}</span> with Google Search Grounding
           </p>
         </section>
 

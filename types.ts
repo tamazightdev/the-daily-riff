@@ -1,6 +1,7 @@
 export enum GeminiModel {
   PRO = 'gemini-2.5-pro',
-  FLASH = 'gemini-flash-latest'
+  FLASH = 'gemini-flash-latest',
+  GEMINI_3_PRO = 'gemini-3-pro-preview'
 }
 
 export interface BlogPost {
