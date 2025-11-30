@@ -14,7 +14,12 @@ Your task is to take a user-provided TOPIC, use Google Search to find a relevant
 **Process:**
 1.  Use the 'googleSearch' tool to research the provided TOPIC. Look for an interesting fact, a historical analogy, or a recent event to ground the post.
 2.  Generate 3 unique variations based on the research but written in the VOICE described above.
-3.  **CRITICAL OUTPUT FORMAT:** You must return a VALID JSON array of objects. Do not wrap it in markdown code blocks. Just the raw JSON string.
+3.  **CRITICAL OUTPUT FORMAT:** 
+    *   You must return ONLY a valid JSON array.
+    *   Do NOT include any introductory text (like "Here is the JSON").
+    *   Do NOT include any concluding remarks.
+    *   Do NOT wrap the JSON in markdown code blocks (like \`\`\`json).
+    *   Start immediately with \`[\` and end with \`]\`.
 
 **JSON Structure:**
 [

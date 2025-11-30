@@ -61,18 +61,21 @@ export const generateBlogPosts = async (
       });
     }
 
-    // Clean up the response text to ensure it's valid JSON
-    // sometimes models wrap in ```json ... ```
-    let cleanJson = textResponse.trim();
-    if (cleanJson.startsWith("```json")) {
-      cleanJson = cleanJson.replace(/^```json/, "").replace(/```$/, "");
-    } else if (cleanJson.startsWith("```")) {
-      cleanJson = cleanJson.replace(/^```/, "").replace(/```$/, "");
-    }
+    let parsedPosts: BlogPost[] = [];
 
-    let parsedPosts: BlogPost[];
+    // Robust JSON extraction logic
     try {
-      parsedPosts = JSON.parse(cleanJson);
+      // 1. Try to find the JSON array bracket pair first (handles conversational prefixes/suffixes)
+      const jsonMatch = textResponse.match(/\[[\s\S]*\]/);
+      if (jsonMatch) {
+        parsedPosts = JSON.parse(jsonMatch[0]);
+      } else {
+        // 2. Fallback: Try cleaning markdown code blocks if the regex failed to find brackets
+        let cleanJson = textResponse.trim();
+        // Remove markdown code blocks if present
+        cleanJson = cleanJson.replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/\s*```$/, "");
+        parsedPosts = JSON.parse(cleanJson);
+      }
     } catch (e) {
       console.error("JSON Parse Error", e);
       console.log("Raw Text:", textResponse);
@@ -92,6 +95,8 @@ export const generateBlogPosts = async (
     let message = "An error occurred while communicating with Gemini.";
     if (error.message && error.message.includes("API key")) {
       message = "Invalid API Key provided.";
+    } else if (error.message && error.message.includes("Failed to parse")) {
+      message = "The model generated an invalid format. Please try again.";
     }
     throw new Error(message);
   }
